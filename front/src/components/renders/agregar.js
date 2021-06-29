@@ -1,22 +1,22 @@
 import React from 'react' 
-import { Form } from 'react-bootstrap'
-const Agregar = ({producto}) => {
-  console.log(producto.nombre)
+
+const Agregar = ({producto,actproducto,actDatos,borrarproducto}) => {
 
   return <React.Fragment> 
-    
-    <tr>
-      
-      <th scope="row"><input type="text" className="form-control" name="nombre" defaultValue={producto.nombre} aria-describedby="emailHelp"/></th>
-      <td><input type="text" className="form-control" name="url" defaultValue={producto.url} aria-describedby="emailHelp"   /></td>
-      <td><input type="text" className="form-control" name="descripcion" defaultValue={producto.descripcion} aria-describedby="emailHelp" /></td>
-      <td><input type="number" className="form-control" name="precio" defaultValue={producto.precio} aria-describedby="emailHelp"/></td>
-      <td><input type="number" className="form-control" name="cant_compra"  defaultValue={producto.stock} aria-describedby="emailHelp"/></td>
-      <td><button type="submit" className="btn btn-primary">Actualizar</button></td>
-      <td><button type="submit" className="btn btn-primary">Borrar</button></td>
-     
-     
-    </tr>
+      <h2>Producto: {producto.nombre} con Id: {producto._id}</h2>
+      <form onSubmit={actproducto} name={producto._id} className="mt-5">
+      <input type="hidden" name="_id" dafaultValue={producto._id}/>
+      <input type="text" onChange={actDatos} className="form-control mt-2" name="nombre" defaultValue={producto.nombre} aria-describedby="emailHelp"/>
+      <input type="text" className="form-control mt-2" onChange={actDatos} name="url" defaultValue={producto.url} aria-describedby="emailHelp"   />
+      <input type="text" className="form-control mt-2" onChange={actDatos} name="descripcion" defaultValue={producto.descripcion} aria-describedby="emailHelp" />
+      <input type="number" className="form-control mt-2" onChange={actDatos} name="precio" defaultValue={producto.precio} aria-describedby="emailHelp"/>
+      <input type="number" className="form-control mt-2" onChange={actDatos} name="stock"  defaultValue={producto.stock} aria-describedby="emailHelp"/>
+      <button type="submit"  className="btn btn-primary mt-2">Actualizar</button>
+      </form>
+      <form onSubmit={borrarproducto} name={producto._id} className="mb-5 mt-2">
+      <button type="submit"  className="btn btn-primary">Borrar</button>
+      </form>
+  
 
 
   </React.Fragment>
