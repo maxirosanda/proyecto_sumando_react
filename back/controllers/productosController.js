@@ -3,7 +3,15 @@ const Mensaje = require('../models/mensajes');
 var mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 
-
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 exports.agregar = async (req, res, next) => {
 
@@ -37,8 +45,9 @@ catch (e) { console.log(e) }
     console.log(req.body)
     try{
       producto = new Producto(req.body)
+      producto.actualizar=makeid(20)
       await producto.save()
-      await res.redirect("/agregar")   
+      await res.status(200).send("creado")    
     }
   catch (e) { console.log(e) }
 }
@@ -49,11 +58,11 @@ exports.updateProducto = async (req, res, next) => {
   let nuevoproducto={}
   
   if(nombre) nuevoproducto.nombre=nombre
-  if(codigo) nuevoproducto.codigo=codigo
   if(descripcion) nuevoproducto.descripcion=descripcion
   if(url) nuevoproducto.url=url
   if(precio) nuevoproducto.precio=precio
   if(stock) nuevoproducto.stock= stock
+  nuevoproducto.actualizar=makeid(20)
 
   try{
     let producto = await Producto.findOneAndUpdate(
@@ -61,7 +70,7 @@ exports.updateProducto = async (req, res, next) => {
     {$set:nuevoproducto},
     {new:true}
     )
-    await res.redirect("/agregar")   
+    await res.status(200).send("actualizado")   
   }
   catch (e) { console.log(e) }
 

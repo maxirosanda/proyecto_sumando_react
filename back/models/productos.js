@@ -8,7 +8,8 @@ const productosSchema = new mongoose.Schema({
     descripcion:{type:String,require:true},
     url: {type:String, require:true},
     precio:{type:Number,require:true},
-    stock:{type:Number,require:true}
+    stock:{type:Number,require:true},
+    actualizar:{type:String,require:true}
 
 })
 
