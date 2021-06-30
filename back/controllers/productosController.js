@@ -80,7 +80,7 @@ exports.updateProducto = async (req, res, next) => {
     let id = req.params.id;
     try{
       producto = await  Producto.deleteOne({_id: id})
-      await res.redirect("/agregar") 
+      await res.status(200).send("borrado")
     }
      catch (e) { console.log(e) } 
 

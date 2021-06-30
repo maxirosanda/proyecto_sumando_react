@@ -1,9 +1,18 @@
 const Carrito = require('../models/carrito');
 
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 exports.getCarritos = async (req, res, next) => {
   try{
-     carrito = await Carrito.find({}).lean() 
-    await res.json({carrito: carrito}) 
+     productos= await Carrito.find({}).lean() 
+    await res.json({productos: productos}) 
   }
   catch (e) { console.log(e) } 
   }
@@ -12,7 +21,7 @@ exports.getCarritos = async (req, res, next) => {
     let id = req.params.id;
     try{
       prodcard = await Carrito.find({_id: id}).lean()
-       await res.render(`prodcard`, {prodcard: prodcard}) 
+       await res.json({prodcard: prodcard}) 
     }
     catch (e) { console.log(e) } 
     }
@@ -25,7 +34,7 @@ exports.getCarritos = async (req, res, next) => {
         console.log("no encontrado")
       carrito = new Carrito(req.body)
       await carrito.save()
-      await res.redirect("/carrito")
+      await res.status(200).send("producto agregado al carro")
 
       }else
       
@@ -33,7 +42,8 @@ exports.getCarritos = async (req, res, next) => {
         console.log(encontrado[0].cant_compra)
         console.log(req.body.cant_compra)
         let nuevoproducto={}
-        nuevoproducto.cant_compra= encontrado[0].cant_compra + parseInt(req.body.cant_compra); 
+        nuevoproducto.cant_compra= encontrado[0].cant_compra + parseInt(req.body.cant_compra);
+        nuevoproducto.actualizar = makeid(20)
   let carrito = await Carrito.findOneAndUpdate(
       {_id: encontrado[0]._id},
       {$set:nuevoproducto},

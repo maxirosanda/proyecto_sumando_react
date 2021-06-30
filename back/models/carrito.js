@@ -8,7 +8,8 @@ const carritosSchema = new mongoose.Schema({
     codigo:{type:String,require:true},
     url: {type:String, require:true},
     precio:{type:Number,require:true},
-    cant_compra : {type:Number,require:true} 
+    cant_compra : {type:Number,require:true}, 
+    actualizar:{type:String,require:true}
 
 })
 
