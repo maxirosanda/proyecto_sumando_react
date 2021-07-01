@@ -8,29 +8,25 @@ const passport = require("passport");
 module.exports = app => {
   
   
-  app.get("/login",sessionController.vistalogin)
-  app.get("/registro",sessionController.vistaregistro)
-  app.get("/logout", sessionController.logout);
-  app.get("/failLogin", (req, res) => { res.send("falla al logear")});
-  app.get("/failRegister", (req, res) => { res.send("falla al registrar")});
+  app.get("/login",sessionController.vistalogin) //SACAR
+  app.get("/registro",sessionController.vistaregistro) //sacaar
+  app.get("/failLogin", (req, res) => { res.send("falla al logear")}); //sacar
+  app.get("/failRegister", (req, res) => { res.send("falla al registrar")}); //sacar
+  app.get("/entrar",middlewareAdmin.auth,ProductosController.agregar) //sacar
+  
   app.post("/login", passport.authenticate('login', {failureRedirect: 'failLogin'}), sessionController.login);
   app.post("/register", passport.authenticate('register', {failureRedirect: 'failRegister'}), sessionController.register);
-
+  app.get("/logout", sessionController.logout);
   app.get("/facebook", passport.authenticate("facebook"));
   app.get("/facebook/callback", passport.authenticate('facebook', {successRedirect: '/agregar', failureRedirect: '/login'}));
 
-
-  app.get("/agregar",middlewareAdmin.auth,ProductosController.agregar)
   app.get('/',ProductosController.getProductos);
   app.get('/producto/:id',ProductosController.getProducto);
   app.post('/productos', ProductosController.createProductos);
   app.put('/productos/:id', ProductosController.updateProducto);
   app.delete('/productos/:id', ProductosController.deleteProductos);
 
-
-
   app.get('/carrito', CarritoController.getCarritos);
-  app.get('/prodcard/:id', CarritoController.getProdcard);
   app.post('/carrito', CarritoController.createCarrito);
   app.put('/carrito/:id',CarritoController.updateCarrito);
   app.delete('/carrito/:id', CarritoController.deleteCarrito);

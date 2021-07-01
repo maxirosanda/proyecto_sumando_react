@@ -9,7 +9,7 @@ const enviarsms = require('../utils/sms')
         enviarsms(req.body.mail,req.body.mensaje)
        }
         await mensaje.save()
-        await res.status(200).send("creado")
+        await res.status(200).send("mensaje creado")
       }
     catch (e) { console.log(e) }
   }

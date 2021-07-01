@@ -17,7 +17,7 @@ exports.agregar = async (req, res, next) => {
 
  try{
   producto = await Producto.find({}).lean()
-  await res.render("agregarProducto", {productos: producto})
+  await res.send("se puede entrar")
 }
 catch (e) { console.log(e) } 
 }
@@ -47,7 +47,7 @@ catch (e) { console.log(e) }
       producto = new Producto(req.body)
       producto.actualizar=makeid(20)
       await producto.save()
-      await res.status(200).send("creado")    
+      await res.status(200).send("Producto agregado a la bases de datos")    
     }
   catch (e) { console.log(e) }
 }
@@ -70,7 +70,7 @@ exports.updateProducto = async (req, res, next) => {
     {$set:nuevoproducto},
     {new:true}
     )
-    await res.status(200).send("actualizado")   
+    await res.status(200).send("Producto actualizado en la base de datos")   
   }
   catch (e) { console.log(e) }
 
@@ -80,7 +80,7 @@ exports.updateProducto = async (req, res, next) => {
     let id = req.params.id;
     try{
       producto = await  Producto.deleteOne({_id: id})
-      await res.status(200).send("borrado")
+      await res.status(200).send("Producto borrado de la base de datos")
     }
      catch (e) { console.log(e) } 
 

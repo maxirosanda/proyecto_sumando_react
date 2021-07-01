@@ -11,12 +11,12 @@ module.exports = {
     },
 
     login: (req, res) => {
-        res.redirect("/agregar");
+        res.status(200).send("logiado") 
     },
 
     register: (req, res) => {
         
-        res.redirect("/agregar");
+        res.status(200).send("registrado") 
     },
 
     logout: async (req, res) => {
@@ -35,7 +35,7 @@ module.exports = {
             await req.session.destroy( err => {
                if(err) return err;
     
-            res.redirect("/login");
+               res.status(200).send("deslogiado") 
             })
          }
          catch (e) { console.log(e) } 

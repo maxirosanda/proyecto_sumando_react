@@ -49,7 +49,7 @@ exports.getCarritos = async (req, res, next) => {
       {$set:nuevoproducto},
       {new:true}
       )
-      await res.redirect("/carrito")
+      await res.status(200).send("se agrego mas cantidad para comprar")  
       }
 
     }
@@ -73,7 +73,7 @@ exports.updateCarrito = async (req, res, next) => {
       {$set:nuevoproducto},
       {new:true}
       )
-      await res.status(200).json(carrito)  
+      await res.status(200).send("agregaste mas cantidad del mismo producto")  
     }
     catch (e) { console.log(e) }
   
@@ -83,7 +83,7 @@ exports.updateCarrito = async (req, res, next) => {
     let id = req.params.id;
     try{
       carrito = await  Carrito.deleteOne({_id: id})
-      await res.redirect("/carrito")  
+      await res.status(200).send("se borro del carrito al carrito")    
     }
      catch (e) { console.log(e) } 
 
