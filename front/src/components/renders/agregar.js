@@ -5,8 +5,7 @@ const Agregar = ({producto,actproducto,actDatos,borrarproducto}) => {
   return <React.Fragment> 
       <h2>Producto: {producto.nombre} con Id: {producto._id}</h2>
       <form onSubmit={actproducto} name={producto._id} className="mt-5">
-      <input type="hidden" name="_id" dafaultValue={producto._id}/>
-      <input type="text" onChange={actDatos} className="form-control mt-2" name="nombre" defaultValue={producto.nombre} aria-describedby="emailHelp"/>
+      <input type="text"  className="form-control mt-2" onChange={actDatos} name="nombre" defaultValue={producto.nombre} aria-describedby="emailHelp"/>
       <input type="text" className="form-control mt-2" onChange={actDatos} name="url" defaultValue={producto.url} aria-describedby="emailHelp"   />
       <input type="text" className="form-control mt-2" onChange={actDatos} name="descripcion" defaultValue={producto.descripcion} aria-describedby="emailHelp" />
       <input type="number" className="form-control mt-2" onChange={actDatos} name="precio" defaultValue={producto.precio} aria-describedby="emailHelp"/>

@@ -35,25 +35,18 @@ const ContainerProducto= () => {
     },[producto])
 
     const agregarcarrito = e => {
-      let nombre=""
-      let descripcion=""
-      let precio=0
-      let cant_compra=0
-      let codigo=""
-      let url=""
+      let json = {}
       e.preventDefault()
       for (let i = 0; i < 6; i++) {
-       if(e.target[i].name=="nombre") nombre = e.target[i].value
-       if(e.target[i].name=="descripcion")  descripcion = e.target[i].value
-       if(e.target[i].name=="precio") precio = e.target[i].value
-       if(e.target[i].name=="codigo")  codigo = e.target[i].value
-       if(e.target[i].name=="url")  url = e.target[i].value
-       if(e.target[i].name=="cant_compra")  cant_compra = e.target[i].value
+       if(e.target[i].name=="nombre") json.nombre = e.target[i].value
+       if(e.target[i].name=="descripcion")  json.descripcion = e.target[i].value
+       if(e.target[i].name=="precio") json.precio = e.target[i].value
+       if(e.target[i].name=="codigo")  json.codigo = e.target[i].value
+       if(e.target[i].name=="url")  json.url = e.target[i].value
+       if(e.target[i].name=="cant_compra")  json.cant_compra = e.target[i].value
      }
-     
-     setCrearProducto({"nombre":nombre,"descripcion":descripcion,"precio":precio,"cant_compra":cant_compra,"codigo":codigo,"url":url})
-     
-     axios.post('http://localhost:8080/carrito',crearProducto)
+    
+      axios.post('http://localhost:8080/carrito',json)
     .then(function (response) {
       console.log(response)
     })
@@ -69,7 +62,6 @@ const ContainerProducto= () => {
 
     const enviarMensaje = e => {
       e.preventDefault()
-      console.log(crearMensaje)
       axios.post('http://localhost:8080/mensajes',crearMensaje)
     .then(function (response) {
       console.log(response)

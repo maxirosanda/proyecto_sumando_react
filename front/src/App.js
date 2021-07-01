@@ -5,6 +5,8 @@ import ContainerAgregar from './components/containers/containerAgregar';
 import ContainerProductos from './components/containers/containerProductos'
 import ContainerProducto from './components/containers/containerProducto'
 import ContainerCarrito from './components/containers/containerCarrito'
+import ContainerLogin from './components/containers/containerLogin'
+import ContainerRegister from './components/containers/containerRegister'
 
 const App = () => {
 
@@ -13,6 +15,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/producto/:id" component={ContainerProducto} />
+        <Route exact path="/register" component={ContainerRegister} />
         <Route exact path="/carrito" component={ContainerCarrito} />
         <Route exact path="/agregar" component={ContainerAgregar} />
         <Route path="/" component={ContainerProductos} />{" "}
